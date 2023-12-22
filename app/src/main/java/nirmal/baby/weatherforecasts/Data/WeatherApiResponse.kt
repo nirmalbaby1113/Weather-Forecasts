@@ -19,6 +19,8 @@ data class Current(
     val temp_c: Float,
     val temp_f: Float,
     val feelslike_c: Float,
+    val humidity: Int,
+    val wind_kph: Float,
     val condition: WeatherCondition
 )
 
@@ -44,6 +46,7 @@ data class Day(
     val mintemp_c: Float,
     val mintemp_f: Float,
     val avgtemp_c: Float,
+    val uv: Float,
     val condition: WeatherCondition
 )
 

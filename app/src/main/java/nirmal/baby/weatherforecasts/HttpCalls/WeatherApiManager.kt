@@ -21,8 +21,6 @@ class WeatherApiManager {
     fun fetchData(apiUrl: String, uiUpdateCallback: (WeatherApiResponse?) -> Unit) {
         val call: Call<WeatherApiResponse> = apiService.fetchData(apiUrl)
 
-
-        Log.d("WeatherApiManager", "URL in Fetch: ${apiUrl}")
         call.enqueue(object : Callback<WeatherApiResponse> {
             override fun onResponse(call: Call<WeatherApiResponse>, response: Response<WeatherApiResponse>) {
                 if (response.isSuccessful) {

@@ -39,7 +39,6 @@ class SearchLocation : AppCompatActivity() {
     private lateinit var searchedShowDetailsButton: TextView
     private lateinit var prefs: SharedPreferences
     private lateinit var gson: Gson
-    private val itemList = mutableListOf<ItemModelLocationWeather>()
     private var itemListForLocal = mutableListOf<ItemModelLocationWeather>()
 
 
@@ -47,6 +46,13 @@ class SearchLocation : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_location)
 
+        init()
+        initializeRecyclerview()
+        goBackToMainActivity()
+        searchLocation()
+    }
+
+    private fun init(){
         recyclerView = findViewById(R.id.recyclerLocationWeatherDetails)
         backTextView = findViewById(R.id.txtViewBack)
         textSearchLocationEditText = findViewById(R.id.editTextSearchLocation)
@@ -58,17 +64,10 @@ class SearchLocation : AppCompatActivity() {
         searchedShowDetailsButton = findViewById(R.id.textViewShowDetailsWeatherMain)
         prefs = getSharedPreferences("WeatherSearchSharedPreference", Context.MODE_PRIVATE)
         gson = Gson()
+        itemListForLocal = getItemList().asReversed()
+    }
 
-
-        goBackToMainActivity()
-
-        itemListForLocal = getItemList()
-
-        adapterLocationWeather = AdapterLocationWeather(this,itemListForLocal)
-        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = adapterLocationWeather
-
+    private fun searchLocation(){
         if (textSearchLocationEditText.text != null)
         {
             textSearchLocationEditText.setOnEditorActionListener { _, actionId, event ->
@@ -80,8 +79,13 @@ class SearchLocation : AppCompatActivity() {
                 false
             }
         }
+    }
 
-
+    private fun initializeRecyclerview(){
+        adapterLocationWeather = AdapterLocationWeather(this,itemListForLocal)
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = adapterLocationWeather
     }
 
     private fun goBackToMainActivity() {
@@ -114,16 +118,13 @@ class SearchLocation : AppCompatActivity() {
     private fun updateUI(weatherApiResponse: WeatherApiResponse) {
 
         itemListForLocal = getItemList()
-
         if (itemListForLocal.size > 4) {
-            Log.d("SearchLocation","Item IF")
             itemListForLocal.removeAt(0)
             itemListForLocal.add(ItemModelLocationWeather(weatherApiResponse.current.temp_c,weatherApiResponse.current.condition.icon,weatherApiResponse.current.condition.text,weatherApiResponse.location.name, weatherApiResponse.location.country))
         }else{
-            Log.d("SearchLocation","Item ELSE")
             itemListForLocal.add(ItemModelLocationWeather(weatherApiResponse.current.temp_c,weatherApiResponse.current.condition.icon,weatherApiResponse.current.condition.text,weatherApiResponse.location.name, weatherApiResponse.location.country))
         }
-        Log.d("SearchLocation","Size: ${itemListForLocal.size}")
+
         saveItemList(itemListForLocal)
         //Log.d("SearchLocation","Object: ${itemListForLocal[0]}")
         relativeLayoutSearchedData.visibility = View.VISIBLE
@@ -160,14 +161,14 @@ class SearchLocation : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun saveItemList(itemList: MutableList<ItemModelLocationWeather>) {
+    private fun saveItemList(itemList: MutableList<ItemModelLocationWeather>) {
         val itemListJson = gson.toJson(itemList)
         val editor = prefs.edit()
         editor.putString("weatherJsonString", itemListJson)
         editor.apply()
     }
 
-    fun getItemList(): MutableList<ItemModelLocationWeather> {
+    private fun getItemList(): MutableList<ItemModelLocationWeather> {
         val itemListJson = prefs.getString("weatherJsonString", null)
         return if (itemListJson != null) {
             val itemType = object : TypeToken<MutableList<ItemModelLocationWeather>>() {}.type

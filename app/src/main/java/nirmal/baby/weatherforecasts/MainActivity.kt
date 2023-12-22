@@ -63,6 +63,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainProgressBar: ProgressBar
     private lateinit var changeLocationTextView: TextView
     private lateinit var locationName: String
+    private lateinit var uvIndexTextView: TextView
+    private lateinit var humidityTextView: TextView
+    private lateinit var windTextView: TextView
     private val itemList = mutableListOf<ItemModelHourlyWeather>()
     private val locationPermissionCode = 123
 
@@ -82,11 +85,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         getLocationNameFromSearchActivity()
-        fetchAPI(locationName)
-
-
         moveToSearchLocationActivity()
-
     }
 
     // Check if the app has location permissions
@@ -133,7 +132,9 @@ class MainActivity : AppCompatActivity() {
                 val latitude = location.latitude
                 val longitude = location.longitude
 
-                locationName = getLocationName(latitude,longitude).toString()
+                //locationName = getLocationName(latitude,longitude).toString()
+
+                fetchAPI(getLocationName(latitude,longitude).toString())
 
             } else {
                 // Handle the case where the location is null
@@ -144,13 +145,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun getLocationName(latitude: Double, longitude: Double): String? {
+    @Suppress("DEPRECATION")
+    private fun getLocationName(latitude: Double, longitude: Double): String? {
         val geocoder = Geocoder(this, Locale.getDefault())
 
         try {
             val addresses: List<Address>? = geocoder.getFromLocation(latitude, longitude, 1)
 
-            if (addresses != null && addresses.isNotEmpty()) {
+            if (!addresses.isNullOrEmpty()) {
                 val address: Address = addresses[0]
                 // You can extract other information like city, state, etc. from the 'address' object
                 return address.getAddressLine(0)
@@ -164,6 +166,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun getLocationNameFromSearchActivity() {
         locationName = intent.getStringExtra("locationName").toString()
+        if (locationName != "null") {
+            fetchAPI(locationName)
+        }
+
     }
 
     private fun fetchAPI(locationName: String) {
@@ -201,11 +207,12 @@ class MainActivity : AppCompatActivity() {
         forecastLayoutThreeDay = findViewById(R.id.threeDayForcastLayout)
         mainProgressBar = findViewById(R.id.mainLoadingIndicator)
         changeLocationTextView = findViewById(R.id.txtViewChangeLocation)
-
-
+        uvIndexTextView = findViewById(R.id.txtViewUvIndex)
+        humidityTextView = findViewById(R.id.txtViewHumidity)
+        windTextView = findViewById(R.id.txtViewWind)
     }
-    private fun updateUI(weatherApiResponse: WeatherApiResponse) {
 
+    private fun updateUI(weatherApiResponse: WeatherApiResponse) {
         //Changing the visibility
         mainProgressBar.visibility = View.GONE
         locationOnTopLinearLayout.visibility = View.VISIBLE
@@ -235,8 +242,10 @@ class MainActivity : AppCompatActivity() {
         tempMinMaxTextView.text = tempMinMaxStringBuilder.toString()
 
         temperatureDescTextView.text = weatherApiResponse.current.condition.text
-
         dateTextView.text = formatDate(weatherApiResponse.forecast.forecastday[0].date)
+        uvIndexTextView.text = weatherApiResponse.forecast.forecastday[0].day.uv.toString()
+        humidityTextView.text = weatherApiResponse.current.humidity.toString()
+        windTextView.text = weatherApiResponse.current.wind_kph.toString()
 
         Picasso
             .get()
@@ -244,9 +253,7 @@ class MainActivity : AppCompatActivity() {
             .into(imageWeatherConditionMain)
 
         dayOneThreeDayForecast.text = getDayOfWeek(weatherApiResponse.forecast.forecastday[0].date)
-
         dayTwoThreeDayForecast.text = getDayOfWeek(weatherApiResponse.forecast.forecastday[1].date)
-
         dayThreeThreeDayForecast.text = getDayOfWeek(weatherApiResponse.forecast.forecastday[2].date)
 
         // Clear the StringBuilder for reuse
@@ -315,7 +322,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun formatDate(dateString: String): String {
 
-        Log.d("MainActivity","Inside Format: ${dateString}")
+        Log.d("MainActivity","Inside Format: $dateString")
         // Define the formatter
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 

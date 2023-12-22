@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Weather Forecasts</string>
     <string name="change_location">Change</string>
+    <string name="today">TODAY</string>
+    <string name="three_day">THREE DAY FORECAST</string>
+    <string name="weather_image_icon">Weather Image Icon</string>
+    <string name="location_image_icon">Location Image Icon</string>
 </resources>

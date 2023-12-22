@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,12 +27,11 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/icons_location__"
                     android:layout_gravity="center"
-                    />
+                    android:contentDescription="@string/location_image_icon" />
                 <TextView
                     android:id="@+id/txtViewLocationName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="location name"
                     android:textColor="@color/white"
                     android:layout_marginStart="5dp"
                     android:textSize="24sp"
@@ -67,7 +65,7 @@
                     android:layout_width="160dp"
                     android:layout_height="160dp"
                     android:layout_gravity="center"
-                    />
+                    android:contentDescription="@string/weather_image_icon" />
                 <TextView
                     android:id="@+id/txtViewWeatherTemperature"
                     android:layout_width="wrap_content"
@@ -80,7 +78,6 @@
                     android:id="@+id/txtViewTemperatureDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Partly Cloudy"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
@@ -89,7 +86,6 @@
                     android:id="@+id/txtViewTemperatureMinMax"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Partly Cloudy"
                     android:textSize="14sp"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/white"
@@ -110,7 +106,8 @@
                 android:layout_below="@id/linearLayoutCurrentWeather"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -127,7 +124,6 @@
                         android:id="@+id/txtViewUvIndex"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1.0"
                         android:layout_marginStart="5dp"
                         android:textColor="@color/white"
                         android:textSize="20sp"
@@ -151,7 +147,6 @@
                         android:id="@+id/txtViewHumidity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="93%"
                         android:layout_marginStart="5dp"
                         android:textColor="@color/white"
                         android:textSize="20sp"
@@ -175,7 +170,6 @@
                         android:id="@+id/txtViewWind"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20 km/h"
                         android:layout_marginStart="5dp"
                         android:textColor="@color/white"
                         android:textSize="20sp"
@@ -206,7 +200,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Today"
+                        android:text="@string/today"
                         android:textSize="20sp"
                         android:textColor="@color/white"
                         android:gravity="start"
@@ -259,7 +253,7 @@
                         android:id="@+id/forecastHeadText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Three Day Forecast"
+                        android:text="@string/three_day"
                         android:textSize="20sp"
                         android:textColor="@color/white"
                         android:gravity="start"
@@ -288,7 +282,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textSize="20sp"
-                        android:text="Monday"
                         android:textColor="@color/white"
                         android:layout_marginStart="16dp"
                         />
@@ -305,7 +298,6 @@
                         android:layout_marginEnd="16dp"
                         android:layout_weight="1"
                         android:textSize="20sp"
-                        android:text="Monday"
                         android:textColor="@color/white"
                         android:gravity="end"
                         />
@@ -322,7 +314,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textSize="20sp"
-                        android:text="Monday"
                         android:textColor="@color/white"
                         android:layout_marginStart="16dp"
                         />
@@ -339,7 +330,6 @@
                         android:layout_marginEnd="16dp"
                         android:layout_weight="1"
                         android:textSize="20sp"
-                        android:text="Monday"
                         android:textColor="@color/white"
                         android:gravity="end"
                         />
@@ -356,7 +346,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textSize="20sp"
-                        android:text="Monday"
                         android:textColor="@color/white"
                         android:layout_marginStart="16dp"
                         />
@@ -373,7 +362,6 @@
                         android:layout_marginEnd="16dp"
                         android:layout_weight="1"
                         android:textSize="20sp"
-                        android:text="Monday"
                         android:textColor="@color/white"
                         android:gravity="end"
                         />
