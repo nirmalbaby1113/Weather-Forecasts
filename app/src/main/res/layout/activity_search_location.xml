@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchLocation"
+    android:background="@drawable/screen_background_gradient"
+    android:padding="25dp">
+
+    <TextView
+        android:id="@+id/txtViewBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:background="@drawable/border_background"
+        android:text="Back"
+        android:textColor="@color/light_blue"
+        />
+
+    <EditText
+        android:id="@+id/editTextSearchLocation"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/txtViewBack"
+        android:layout_marginTop="16dp"
+        android:hint="Search for a city or country"
+        android:textColorHint="@color/grey"
+        android:background="@drawable/container_background_large"
+        android:textColor="@color/off_white"
+        android:paddingStart="16dp"
+        android:imeOptions="actionSearch"
+        />
+
+    <RelativeLayout
+        android:id="@+id/searchedWeatherLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/container_background_large"
+        android:padding="16dp"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/editTextSearchLocation">
+
+        <LinearLayout
+            android:id="@+id/weatherLocationLinearLayoutLeftMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/txtViewTemperatureInLocationMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="64sp"
+                android:text="24C"
+                android:textColor="@color/white"
+                />
+
+            <TextView
+                android:id="@+id/txtViewTemperatureDescInLocationMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="12sp"
+                android:text="Mist"
+                android:textColor="@color/off_white"
+                android:textStyle="normal"
+                />
+            <TextView
+                android:id="@+id/txtViewLocationInLocationMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:text="London"
+                android:textColor="@color/off_white"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/weatherLocationLinearLayoutRightMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/imageViewWeatherConditionInLocationMain"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="end"/>
+
+            <TextView
+                android:id="@+id/textViewShowDetailsWeatherMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show Details"
+                android:background="@drawable/border_background"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:layout_gravity="end"
+                tools:ignore="SmallSp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutDivider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/searchedWeatherLayout"
+        android:layout_marginTop="16dp">
+
+        <!-- Line 1 -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:layout_gravity="center"/>
+
+        <!-- TextView for Last 5 Searches -->
+        <TextView
+            android:id="@+id/lastSearchesTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Recent Five Searches"
+            android:gravity="center"
+            android:textColor="@color/white"/>
+
+        <!-- Line 2 -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerLocationWeatherDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:layout_below="@id/layoutDivider"
+        android:layout_marginTop="16dp"
+        />
+
+</RelativeLayout>

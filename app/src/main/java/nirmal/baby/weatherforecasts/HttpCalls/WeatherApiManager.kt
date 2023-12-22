@@ -18,7 +18,7 @@ class WeatherApiManager {
 
     private val apiService = retrofit.create(WeatherApiService::class.java)
 
-    fun fetchData(apiUrl: String) {
+    fun fetchData(apiUrl: String, uiUpdateCallback: (WeatherApiResponse?) -> Unit) {
         val call: Call<WeatherApiResponse> = apiService.fetchData(apiUrl)
 
 
@@ -26,16 +26,19 @@ class WeatherApiManager {
         call.enqueue(object : Callback<WeatherApiResponse> {
             override fun onResponse(call: Call<WeatherApiResponse>, response: Response<WeatherApiResponse>) {
                 if (response.isSuccessful) {
-                    val data: String? = response.body()?.location?.name
-                    // Handle the data, e.g., update UI
-                    Log.d("WeatherApiManager", "Response: ${data}")
+                    //val data: String? = response.body()?.location?.name
+                    val weatherApiResponse: WeatherApiResponse? = response.body()
+                    uiUpdateCallback.invoke(weatherApiResponse)
+                    //Log.d("WeatherApiManager", "Response: ${data}")
                 } else {
+                    uiUpdateCallback.invoke(null)
                     Log.d("WeatherApiManager", "${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<WeatherApiResponse>, t: Throwable) {
                 println("Error: ${t.message}")
+                uiUpdateCallback(null)
             }
         })
     }

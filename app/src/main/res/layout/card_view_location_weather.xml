@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/container_background_large"
+    android:padding="16dp"
+    android:layout_marginTop="16dp">
+
+    <LinearLayout
+        android:id="@+id/weatherLocationLinearLayoutLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/txtViewTemperatureInLocationCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="64sp"
+            android:text="24C"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/txtViewTemperatureDescInLocationCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="12sp"
+            android:text="Mist"
+            android:textColor="@color/off_white"
+            android:textStyle="normal"
+            />
+        <TextView
+            android:id="@+id/txtViewLocationInLocationCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp"
+            android:text="London"
+            android:textColor="@color/off_white"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weatherLocationLinearLayoutRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/imageViewWeatherConditionInLocationCard"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="end"/>
+
+        <TextView
+            android:id="@+id/textViewShowDetailsWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Details"
+            android:background="@drawable/border_background"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:layout_gravity="end"
+            tools:ignore="SmallSp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
